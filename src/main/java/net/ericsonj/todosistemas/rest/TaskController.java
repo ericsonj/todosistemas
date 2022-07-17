@@ -22,7 +22,7 @@ import net.ericsonj.todosistemas.models.UserDaoFacade;
 
 /**
  *
- * @author ericson
+ * @author Ericson Joseph
  */
 @Path("/tasks")
 public class TaskController {
@@ -50,7 +50,9 @@ public class TaskController {
             return Response.status(Status.BAD_REQUEST).entity("User assigned not found").build();
         }
         Task newTask = new Task(task.getName(), task.getEndDate(), task.getAssignedTo());
-        taskFacade.create(newTask);
+        long id = taskFacade.create(newTask);
+        System.out.println(id);
+        newTask.setId(id);
         return Response.ok(newTask).status(Status.CREATED).build();
     }
 
